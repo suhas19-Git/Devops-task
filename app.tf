@@ -21,7 +21,7 @@ resource "aws_vpc" "main_vpc" {
   tags = {
     Name = "main-vpc"
   }
-}
+}   
 
 # subnet.tf
 resource "aws_subnet" "main_subnet" {
