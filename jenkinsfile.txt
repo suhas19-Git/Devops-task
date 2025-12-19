@@ -4,11 +4,11 @@ pipeline {
     stages {
 
         stage('Checkout') {
-            steps {
-                // Git repo nalli code pull madoke
-                git branch: 'staging', url: 'https://github.com/suhas19-Git/Devops-task.git'
-            }
-        }
+    steps {
+        git branch: 'main', url: 'https://github.com/suhas19-Git/Devops-task.git'
+    }
+}
+
 
         stage('Build') {
             steps {
