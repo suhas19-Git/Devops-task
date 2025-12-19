@@ -1,0 +1,43 @@
+pipeline {
+    agent any  
+    
+
+     stages {
+        stage('Checkout') {
+            steps {
+                // GitHub repo nalli code pull madoke
+                git branch: 'main', url: 'https://github.com/suhas19-Git/jenkins-project.git'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                // Build command, example: Maven
+                sh 'mvn clean install'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                // Run tests
+                sh 'mvn test'
+            }
+        }
+
+        stage('deploy') {
+            steps {
+                // Simple deploy step (example)
+                echo 'Deploying application...'
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Pipeline executed successfully!'
+        }
+        failure {
+            echo 'Pipeline failed!'
+        }
+    }
+}
