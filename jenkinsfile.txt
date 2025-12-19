@@ -1,48 +1,23 @@
 pipeline {
-    agent any  
-
+    agent any
     tools {
-    maven 'Maven3'   // Name given in Jenkins Global Tool Config
-}
-
-    
-
-     stages {
+        maven 'Maven3'   // Must match name in Global Tool Config
+    }
+    stages {
         stage('Checkout') {
             steps {
-                // GitHub repo nalli code pull madoke
-                git branch: 'main', url: 'https://github.com/suhas19-Git/Devops-task.git'
+                git branch: 'staging', url: 'https://github.com/suhas19-Git/Devops-task.git'
             }
         }
-
-       stage('Build') {
-    steps {
-        // Ensure Maven installed in Jenkins tools
-        sh 'mvn clean install'
+        stage('Build') {
+            steps {
+                sh 'mvn clean install'
             }
         }
-
         stage('Test') {
             steps {
-                // Run tests
                 sh 'mvn test'
             }
-        }
-
-        stage('deploy') {
-            steps {
-                // Simple deploy step (example)
-                echo 'Deploying application...'
-            }
-        }
-    }
-
-    post {
-        success {
-            echo 'Pipeline executed successfully!'
-        }
-        failure {
-            echo 'Pipeline failed!'
         }
     }
 }
