@@ -3,41 +3,46 @@ pipeline {
 
     stages {
 
-        stage('Checkout') {
-    steps {
-        git branch: 'staging', url: 'https://github.com/suhas19-Git/Devops-task.git'
-    }
-}
-
-
-        stage('Build') {
+        stage('IP Address') {
             steps {
-                // Build project using system Maven
-                sh 'mvn clean install'
+                sh '''
+                echo "===== IP ADDRESS ====="
+                hostname -I
+                '''
             }
         }
 
-        stage('Test') {
+        stage('Disk Usage') {
             steps {
-                // Run unit tests
-                sh 'mvn test'
+                sh '''
+                echo "===== DISK USAGE ====="
+                df -h
+                '''
             }
         }
 
-        stage('Deploy') {
+        stage('CPU Details') {
             steps {
-                // Simple deploy step (demo)
-                echo 'Deploying application...'
+                sh '''
+                echo "===== CPU DETAILS ====="
+                lscpu
+                '''
+            }
+        }
+
+        stage('Memory Usage') {
+            steps {
+                sh '''
+                echo "===== MEMORY USAGE ====="
+                free -h
+                '''
             }
         }
     }
 
     post {
-        success {
-            echo 'Pipeline executed successfully!'
-        }
-        failure {
-            echo 'Pipeline failed!'
+        always {
+            echo "System info pipeline completed ✅"
         }
     }
 }
