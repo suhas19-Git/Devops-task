@@ -1,0 +1,43 @@
+pipeline {
+    agent any
+
+    stages {
+
+        stage('Checkout') {
+    steps {
+        git branch: 'staging', url: 'https://github.com/suhas19-Git/Devops-task.git'
+    }
+}
+
+
+        stage('Build') {
+            steps {
+                // Build project using system Maven
+                sh 'mvn clean install'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                // Run unit tests
+                sh 'mvn test'
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                // Simple deploy step (demo)
+                echo 'Deploying application...'
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Pipeline executed successfully!'
+        }
+        failure {
+            echo 'Pipeline failed!'
+        }
+    }
+}
